@@ -31,6 +31,9 @@ pipenv install nose pylint --dev
 
 ## Deploiement des packages python depuis le clone du repo GitHub
 
+Depuis le user de developement, création de l'env pipenv:
+`pipenv --python /usr/bin/python3`
+
 ```
 cd dev/OraTune
 pipenv install
@@ -38,7 +41,12 @@ pipenv install
 
 ## Démarrer le projet
 
-
+Population de la bdd:
+```
+cd dev/OraTune/app
+pipenv run ./manage.py migrate
+pipenv run ./manage.py createsuperuser
+```
 
 
 
@@ -78,7 +86,7 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'default'
 ```
 
-Mise ne place de la doc Sphinx:
+Mise en place de la doc Sphinx:
 ```
 mkdir dev/OraTune/sphinx
 mkdir dev/OraTune/app/app/static/docs
