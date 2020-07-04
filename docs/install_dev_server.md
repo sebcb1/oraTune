@@ -23,7 +23,7 @@ Mise à jour du système:
 `yum update -y`
 
 Changement du runlevel par défaut:
-`systemctl isolate multi-user.target`
+`systemctl set-default multi-user.target`
 
 Reboot du serveur...
 
@@ -33,6 +33,7 @@ Installation des rpm:
 ```
 yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 rpm -Uvh https://download.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum install centos-release-scl-rh
 yum install postgresql11-server postgresql11 postgresql11-devel.x86_64
 ```
 
@@ -47,6 +48,9 @@ Modification de /var/lib/pgsql/11/data/pg_hba.conf:
 ```
 host    oratune             oratune             127.0.0.1/32            md5
 ```
+
+Resdémarrer postgres:
+`systemctl restart postgresql-11`
 
 Creation de la base de données oratune:
 ```
@@ -79,7 +83,7 @@ wget https://download.oracle.com/otn_software/linux/instantclient/19600/oracle-i
 rpm -i oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
 ```
 
-Ajout dans le profile:
+Ajout dans le profile .bash_profile du user dev:
 ```
 export LD_LIBRARY_PATH=/usr/lib/oracle/19.6/client64/lib:$LD_LIBRARY_PATH
 ```
@@ -110,18 +114,6 @@ Installation de pipenv:
 pip3 install  pipenv
 ```
 
-### Deploiement des packages python from scratch
-
-Depuis le user de developement, création de l'env pipenv:
-`pipenv --python /usr/bin/python3`
-
-Ajout des packages python
-```
-pipenv install django psycopg2-binary celery django-celery-results scikit-optimize cx-oracle
-pipenv install nose pylint --dev
-```
-
-### Deploiement des packages python depuis
 
 
 
