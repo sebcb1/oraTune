@@ -55,21 +55,25 @@ cd dev/OraTune
 pipenv run django-admin.py startproject app
 ```
 
-Editer ./web/settings.py:
+Editer ./app/settings.py:
 ```
 ALLOWED_HOSTS = ['*']
+
+INSTALLED_APPS = [
+    'django_celery_results',
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'OraTune',
-        'USER': 'OraTune',
-        'PASSWORD': 'OraTune',
+        'NAME': 'oratune',
+        'USER': 'oratune',
+        'PASSWORD': 'oratune',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
 
+CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'default'
 ```

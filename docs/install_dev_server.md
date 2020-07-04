@@ -46,7 +46,7 @@ systemctl start postgresql-11
 
 Modification de /var/lib/pgsql/11/data/pg_hba.conf:
 ```
-host    oratune             oratune             127.0.0.1/32            md5
+local   all             all                                     md5
 ```
 
 Resdémarrer postgres:
@@ -60,6 +60,8 @@ create database oratune;
 create user oratune with encrypted password 'oratune';
 grant all privileges on database oratune to oratune;
 ```
+
+Tester la connexion: `psql  -U oratune -d oratune`
 
 ## Installation de rabitmq
 
