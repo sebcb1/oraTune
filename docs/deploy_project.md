@@ -8,6 +8,10 @@ Toutes les opérations suivantes se font depuis le user unix de developpement
 mkdir dev
 cd dev
 git clone https://github.com/sebcb1/OraTune.git
+cd OraTune
+git config --global user.email "sebastienbrillard@icloud.com"
+git config --global user.name  "Sébastien Brillard"
+git config --global push.default simple
 ```
 
 Toutes les commandes suivantes sont faites depuis le répertoire:
@@ -25,7 +29,19 @@ pipenv install Sphinx
 pipenv install nose pylint --dev
 ```
 
-## Deploiement des packages python depuis 
+## Deploiement des packages python depuis le clone du repo GitHub
+
+```
+cd dev/OraTune
+pipenv install
+```
+
+## Démarrer le projet
+
+
+
+
+
 
 ## Initialisation du projet Django
 
@@ -58,20 +74,21 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'default'
 ```
 
+Mise ne place de la doc Sphinx:
+```
+mkdir dev/OraTune/sphinx
+mkdir dev/OraTune/app/app/static/docs
+cd dev/OraTune/sphinx
+pipenv run sphinx-quickstart
+pipenv run sphinx-build -b html . ../app/app/static/docs/
+```
+
 Population de la bdd:
 ```
-cd cd dev/OraTune/app
+cd dev/OraTune/app
 pipenv run ./manage.py migrate
 pipenv run ./manage.py createsuperuser
 pipenv run ./manage.py migrate django_celery_results
-```
-
-Mise ne place de la doc Sphinx:
-```
-cd dev/OraTune/app
-pipenv run sphinx-quickstart
-cd OraTune/sphinx
-pipenv run sphinx-build -b html . ../web/web/static/docs/
 ```
 
 ### Quelques commandes django
