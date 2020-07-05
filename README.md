@@ -11,6 +11,10 @@ Optimization des paramètres d'une instance Oracle par processus gaussien.
 
 ## Installation de OraTune
 
+## Quelques liens utiles
+
+* [quelques liens](docs/links.md)
+
 
 
 

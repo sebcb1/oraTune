@@ -26,6 +26,10 @@ Ajout des packages python:
 ```
 pipenv install django psycopg2-binary celery django-celery-results scikit-optimize cx-oracle
 pipenv install Sphinx
+pipenv install djangorestframework
+pipenv install markdown
+pipenv install django-filter
+pipenv install drf-yasg
 pipenv install nose pylint --dev
 ```
 
@@ -48,6 +52,15 @@ pipenv run ./manage.py migrate
 pipenv run ./manage.py createsuperuser
 ```
 
+Démarrer le serveur web:
+```
+pipenv run ./manage.py runserver 0.0.0.0:8000
+```
+
+Démarrer les workers Celery:
+```
+pipenv run celery -A web worker -l info --concurrency=2
+```
 
 
 
@@ -69,6 +82,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django_celery_results',
+    'app',
 
 DATABASES = {
     'default': {
@@ -105,4 +119,8 @@ pipenv run ./manage.py migrate django_celery_results
 
 ### Quelques commandes django
 
-
+Générer les modifications de base de données et les appliquées:
+```
+pipenv run ./manage.py makemigrations app
+pipenv run ./manage.py migrate
+```
