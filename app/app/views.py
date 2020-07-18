@@ -4,6 +4,11 @@ from rest_framework.viewsets import ModelViewSet
 import logging
 from app.models import Databases
 from app.models import DatabasesSerializer
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from drf_yasg.utils import swagger_auto_schema
 
 LOGGING_CONFIG = None
 logging.config.dictConfig({
@@ -32,7 +37,21 @@ logging.config.dictConfig({
 
 logger = logging.getLogger(__name__)
 
-class DatabasesViewset(ModelViewSet):
-    queryset = Databases.objects.all()
-    serializer_class = DatabasesSerializer
+
+
+class DatabaesAPIView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    @swagger_auto_schema(
+        operation_description="partial_update description override",
+        responses={
+            '200': "Ok",
+            '400': "Bad Request"
+        })
+    def get(self, request, format=None):
+        content = {
+            'user': 'toto'
+        }
+        return Response(content)   
 
